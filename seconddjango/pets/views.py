@@ -50,4 +50,19 @@ class TurtleViewID(View):
         # return dict
         return JsonResponse(finalData, safe=False)
     ## Update
+    def put(self, request, id):
+        # get red body
+        body = GetBody(request)
+        
+        ## update
+        ## **: unpackaging operator: unpacks dictionary and turns it into separate arguments
+        ## tells update function to update each property
+        Turtle.objects.filter(id=id).update(**body)
+        
+        # get updated turtle from db
+        turtle = Turtle.objects.get(id=id)
+        # serialize it
+        finalData = json.loads(serialize("json", [turtle]))
+        return JsonResponse(finalData, safe=False)
+        
     ## Delete
