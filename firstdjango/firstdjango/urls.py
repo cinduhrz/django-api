@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from firstapp.views import FirstView, functionview, templateview
+from firstapp.views import FirstView, functionview, templateview, SecondView
 
 # setup routes here
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('first/', FirstView.as_view()),
     path('f/', functionview),
-    path('template/', templateview)
+    path('template/', templateview),
+    # use <> instead of : (in express) to indicate it's a param
+    # use datatype:<param> to specify datatype to take it in as (will throw an error if it doesnt get an int)
+    path('second/<int:param>/', SecondView.as_view())
 ]
