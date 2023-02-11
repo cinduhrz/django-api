@@ -20,5 +20,9 @@ class TurtleView(View):
     def get(self, request):
         # save all turtles objects in a var
         all = Turtle.objects.all()
-        # use serializer to turn obj into JSON string
-        
+        # use serializer to turn obj (bc rn they are just pure objects, not dictionaries yet) into JSON string
+        serialized = serialize("json", all)
+        # turn json strings back into dictionaries
+        # bc JsonResponse takes dictionaries
+        finalData = json.loads(serialized)
+        return JsonResponse(finalData, safe=False)
