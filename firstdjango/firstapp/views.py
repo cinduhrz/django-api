@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
+from .helpers import GetBody
 # Create your views here.
 
 # class-based view
@@ -32,6 +33,32 @@ def templateview(request):
 class SecondView(View):
     def get(self, request, param):
         # allows u to use queries
-        # syntax .get(key, default if key can't be found)
+        # syntax .get(key, default if query is not specified)
         query = request.GET.get("query", "no query")
-        return JsonResponse({"param": param, "query": query})
+        bread = request.GET.get("bread", "no bread")
+        return JsonResponse({"param": param, "query": query, "bread": bread})
+    
+    def post(self, request, param):
+        query = request.GET.get("query", "no query")
+        bread = request.GET.get("bread", "no bread")
+        return JsonResponse({"param": param, "query": query, "bread": bread})
+    
+    def put(self, request, param):
+        query = request.GET.get("query", "no query")
+        bread = request.GET.get("bread", "no bread")
+        return JsonResponse({"param": param, "query": query, "bread": bread})
+    
+    def delete(self, request, param):
+        query = request.GET.get("query", "no query")
+        bread = request.GET.get("bread", "no bread")
+        return JsonResponse({"param": param, "query": query, "bread": bread})
+    
+class ThirdView(View):
+    def post(self, request):
+        return JsonResponse(GetBody(request))
+    
+    
+# Views classes structure
+# ex. dog model
+# /dog - (get (index), post (create))
+# /dog/:id - (get (show), put (update), delete (destroy))

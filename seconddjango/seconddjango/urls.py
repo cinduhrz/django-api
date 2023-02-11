@@ -1,4 +1,4 @@
-"""firstdjango URL Configuration
+"""seconddjango URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -15,16 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from firstapp.views import FirstView, functionview, templateview, SecondView, ThirdView
 
-# setup routes here
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('first/', FirstView.as_view()),
-    path('f/', functionview),
-    path('template/', templateview),
-    # use <> instead of : (in express) to indicate it's a param
-    # use datatype:<param> to specify datatype to take it in as (will throw an error if it doesnt get an int)
-    path('second/<int:param>/', SecondView.as_view()),
-    path('third/', ThirdView.as_view())
 ]
