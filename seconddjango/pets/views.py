@@ -18,7 +18,7 @@ from django.core.serializers import serialize
 class TurtleView(View):
     ## Index
     def get(self, request):
-        # save all turtles objects in a var
+        # save all turtles objects in a var (an array)
         all = Turtle.objects.all()
         # use serializer to turn obj (bc rn they are just pure objects, not dictionaries yet) into JSON string
         serialized = serialize("json", all)
@@ -33,7 +33,8 @@ class TurtleView(View):
         body = GetBody(request)
         print(body)
         # cant use dot notation bc body is a dictionary, not a pure object
-        turtle = Turtle.object.create(name=body["name"], age=body["age"])
+        turtle = Turtle.objects.create(name=body["name"], age=body["age"])
         # serialize turtle obj into json and then into dict
+        # pass turtle as an array bc thats what serialize() expects
         finalData = json.loads(serialize("json", [turtle]))
         return JsonResponse(finalData, safe=False)
