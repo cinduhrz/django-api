@@ -38,3 +38,16 @@ class TurtleView(View):
         # pass turtle as an array bc thats what serialize() expects
         finalData = json.loads(serialize("json", [turtle]))
         return JsonResponse(finalData, safe=False)
+    
+    
+class TurtleViewID(View):
+    ## Show
+    def get(self, request, id):
+        # get turtle
+        turtle = Turtle.objects.get(id=id)
+        # serialize turtle
+        finalData = json.loads(serialize("json", [turtle]))
+        # return dict
+        return JsonResponse(finalData, safe=False)
+    ## Update
+    ## Delete
