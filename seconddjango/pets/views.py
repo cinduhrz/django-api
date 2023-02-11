@@ -26,3 +26,14 @@ class TurtleView(View):
         # bc JsonResponse takes dictionaries
         finalData = json.loads(serialized)
         return JsonResponse(finalData, safe=False)
+    
+    ## Create
+    def post(self, request):
+        # get the req body
+        body = GetBody(request)
+        print(body)
+        # cant use dot notation bc body is a dictionary, not a pure object
+        turtle = Turtle.object.create(name=body["name"], age=body["age"])
+        # serialize turtle obj into json and then into dict
+        finalData = json.loads(serialize("json", [turtle]))
+        return JsonResponse(finalData, safe=False)
