@@ -31,4 +31,7 @@ def templateview(request):
 # inherit from View class     
 class SecondView(View):
     def get(self, request, param):
-        return JsonResponse({"param": param})
+        # allows u to use queries
+        # syntax .get(key, default if key can't be found)
+        query = request.GET.get("query", "no query")
+        return JsonResponse({"param": param, "query": query})
