@@ -4,6 +4,7 @@ from django.views import View
 # Create your views here.
 
 # class-based view
+# inherit from View class
 class FirstView(View):
     # this function will run for a get request
     # functions should be named after their restful route verbs
@@ -26,3 +27,8 @@ def functionview(request):
 
 def templateview(request):
     return render(request, "cheese.html", {"hello": "hello world"})
+   
+# inherit from View class     
+class SecondView(View):
+    def get(self, request, param):
+        return JsonResponse({"param": param})
