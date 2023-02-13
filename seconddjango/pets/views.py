@@ -51,7 +51,7 @@ class TurtleViewID(View):
         return JsonResponse(finalData, safe=False)
     ## Update
     def put(self, request, id):
-        # get red body
+        # get req body
         body = GetBody(request)
         
         ## update
@@ -66,3 +66,12 @@ class TurtleViewID(View):
         return JsonResponse(finalData, safe=False)
         
     ## Delete
+    def delete(self, request, id):
+        # get turtle
+        turtle = Turtle.objects.get(id=id)
+        # delete turtle
+        turtle.delete()
+        # serialize and return the deleted turtle
+        finalData = json.loads(serialize("json", [turtle]))
+        return JsonResponse(finalData, safe=False)
+        
